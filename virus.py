@@ -43,27 +43,34 @@ def sumInfected(_inf,_ninf):
 
 def display(_inf):
     day = int(input("Enter the day you want to check : "))
-    print(_inf[day-1])
+    if day != 0:
+        print(_inf[day-1])
+    elif day == 0 :
+        exit
 
 
 def completeEvolution(_pop,_inf,_maxdays):
     for i in range (0,_maxdays):
         match i:
             case x if x >= 30 and x < 75:
-                nv_inf = newInfected(_inf[i],_pop,3)
+                nv_inf = round(newInfected(_inf[i],_pop,3),2)
                 _inf.append(nv_inf)
-                #print(_inf)
             case _:
-                nv_inf = newInfected(_inf[i],_pop,10)
+                nv_inf = round(newInfected(_inf[i],_pop,10),2)
                 _inf.append(nv_inf)
-                #print(_inf)
+    print(_inf)
 
 def picInfection(_inf):
     max_value = max(_inf)
     index_max = _inf.index(max_value)
     print(f"La valeur max est : {max_value} et tombe le {index_max+1}")
 
-def averageNewContamination():
+def averageContamination(_inf):
+    total = sum(_inf)
+    average = total/len(_inf)
+    return average
+
+#def pronosticEndOfHumanity(_pop,_inf):
     
 
 def main():            
@@ -73,6 +80,7 @@ def main():
     completeEvolution(population,infected,max_days)
     display(infected)
     picInfection(infected)
-
+    print(f"La moyenne de personne contaminée par jour est : {averageContamination(infected)}")
+   # pronosticEndOfHumanity(population,infected)
 
 main()
