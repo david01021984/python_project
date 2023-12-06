@@ -42,11 +42,13 @@ def sumInfected(_inf,_ninf):
     return _inf + _ninf 
 
 def display(_inf):
-    day = int(input("Enter the day you want to check : "))
-    if day != 0:
-        print(_inf[day-1])
-    elif day == 0 :
-        exit
+    while True:
+        day = int(input("Enter the day you want to check or -0- to quit: "))
+        if day != 0:
+            print(_inf[day-1])
+        elif day == 0 :
+            break
+        
 
 
 def completeEvolution(_pop,_inf,_maxdays):
@@ -63,7 +65,7 @@ def completeEvolution(_pop,_inf,_maxdays):
 def picInfection(_inf):
     max_value = max(_inf)
     index_max = _inf.index(max_value)
-    print(f"La valeur max est : {max_value} et tombe le {index_max}")
+    print(f"La valeur max est : {max_value} et tombe le {index_max}e jour!")
 
 def averageContamination(_inf):
     return sum(_inf)/len(_inf)
