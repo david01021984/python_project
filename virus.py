@@ -63,12 +63,10 @@ def completeEvolution(_pop,_inf,_maxdays):
 def picInfection(_inf):
     max_value = max(_inf)
     index_max = _inf.index(max_value)
-    print(f"La valeur max est : {max_value} et tombe le {index_max+1}")
+    print(f"La valeur max est : {max_value} et tombe le {index_max}")
 
 def averageContamination(_inf):
-    total = sum(_inf)
-    average = total/len(_inf)
-    return average
+    return sum(_inf)/len(_inf)
 
 #def pronosticEndOfHumanity(_pop,_inf):
     
