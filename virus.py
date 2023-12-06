@@ -63,7 +63,7 @@ def picInfection(_inf):
     print(f"La valeur max est : {max_value} et tombe le {index_max}e jour!")
 
 def averageContamination(_inf):
-    return sum(_inf)/len(_inf)
+    return round(sum(_inf)/len(_inf),2)
 
 def pronosticEndOfHumanity():
     print("Pas besoin de python pour ça, à ce rythme là on va pas tenir longtemps encore...")
@@ -77,6 +77,6 @@ def main():
     display(infected)
     picInfection(infected)
     print(f"La moyenne de personne contaminée par jour est : {averageContamination(infected)}")
-    pronosticEndOfHumanity(population,infected)
+    pronosticEndOfHumanity()
 
 main()
