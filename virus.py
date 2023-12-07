@@ -32,6 +32,7 @@ Affichez le numéro du jour du premier pic du nombre de personnes infectées.
 
 '''
 
+
 def newInfected(_inf,_pop,_rpj):
     PT = 0.01
     PG = 0.05
@@ -43,11 +44,11 @@ def display(_inf):
         day = int(input("Enter the day you want to check or -0- to quit: "))
         if day != 0:
             print(_inf[day-1])
-        elif day == 0 :
+        elif day == 0:
             break
 
 def completeEvolution(_pop,_inf,_maxdays):
-    for i in range (0,_maxdays):
+    for i in range (0,_maxdays-1):
         match i:
             case x if x >= 30 and x < 75:
                 nv_inf = round(newInfected(_inf[i],_pop,3),2)
@@ -66,8 +67,8 @@ def averageContamination(_inf):
     return round(sum(_inf)/len(_inf),2)
 
 def pronosticEndOfHumanity():
-    print("Pas besoin de python pour ça, à ce rythme là on va tous être contaminé...")
-    
+    print("Pas besoin de python pour ça, à ce rythme là on va tous être contaminé bientot...")
+      
 
 def main():            
     population = 11500000
