@@ -67,7 +67,7 @@ def averageContamination(_inf):
     return round(sum(_inf)/len(_inf),2)
 
 def pronosticEndOfHumanity():
-    print("Pas besoin de python pour ça, à ce rythme là on va tous être contaminé bientot...")
+    print("Pas besoin de python pour ça, avec ce modèle là on va tous être contaminé bientot...")
       
 
 def main():            
@@ -81,3 +81,5 @@ def main():
     pronosticEndOfHumanity()
 
 main()
+
+
