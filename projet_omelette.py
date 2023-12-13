@@ -169,9 +169,11 @@ class Poelle():
         self.contenu = [] if contenu is None else contenu
     
     def cuire(self,ingredient):
-        time.sleep(4)
+        time.sleep(1)
+        print("Cuisson en cours...")
+        time.sleep(3)
         ingredient.etat = "cuit"
-        print(f"Notre {ingredient.nom} est cuit")
+        print(f"Notre {ingredient.nom} est cuite")
     
     
 #instanciation des objects utilisés dans le prog
@@ -203,6 +205,7 @@ print(david.lieu)
 '''
 
 def main():
+    print(f"Ou est David: {david.lieu}")
     david.seDeplacer(maison)
     print(f"Ou est David: {david.lieu}")
 
@@ -244,30 +247,17 @@ def main():
 
     omelette = mon_bol.battre("omelette")
     print(mon_bol.contenu[0])
-
+    #Je passe les ingredients de mon bol a ma poelle...
     ma_poelle.contenu = mon_bol.contenu
-   # mon_bol.contenu.clear() 
 
     print(ma_poelle.contenu)
 
     mon_bol.contenu = []
-    print(f"dans mon bol y a : {mon_bol.contenu}")
+    #print(f"dans mon bol y a : {mon_bol.contenu}")
     
     print(omelette.etat)
     ma_poelle.cuire(omelette)
 
-    print(maison.personnes)
-    print(epicerie.personnes)
-
-
-'''
-Mélangez le contenu du bol avec la méthode melanger. Nommez ce mélange une 'omelette' (à passer en paramètre).
- Affichez un message avec le nouveau mélange.
- Videz le contenu du bol dans la poêle. Il ne doit plus rien avoir dans le bol et il doit y avoir juste l'omelette pas cuite.
-
- Cuisez l'omelette avec la méthode de la poêle.
- Affichez un message final : print("Notre omelette est cuite :)")
-'''
 
 main()
 
