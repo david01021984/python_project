@@ -1,5 +1,6 @@
-#import
+#import libraries nécessaires
 import time 
+import pygame   
 
 #definition de mes classes 
 
@@ -8,6 +9,9 @@ class Panier():
     def __init__(self,type="Panier",contenu=None):
         self.type = type 
         self.contenu = [] if contenu is None else contenu
+    
+    def MontrerContenu(self):
+        print(f"Le panier contient : {panier_1.contenu}") 
         
 class Personnage():
 # Personnage: Représente un personnage avec un nom, une quantité d'argent, un lieu actuel, 
@@ -42,6 +46,14 @@ class Personnage():
         print(f"Merci {self.nom} d'avoir utiliser un panier réutilisable à vous!")
         print("La planète vous en remercie... Beau geste!!!")
 
+    def localiser(self):
+        print(f"{self.nom} se trouve à : {self.lieu}")
+
+    def detenirEnMain(self):
+        print(f"{self.nom} a en main les articles suivants : {self.main_gauche}")
+
+    def avoirEnPoche(self):
+        print(f"{david.nom} a {david.argent} euro(s) en poche")
 
 class Lieu():
 # Lieu: Représente un lieu avec un nom et une liste de personnes présentes
@@ -85,16 +97,25 @@ class Bol():
         new_ingr = Ingredient(nom_melange,0,"cru")
         self.contenu = nom_melange
         return new_ingr
+    
+    def nettoyer(self):
+        self.contenu = []
+        time.sleep(2)
+        print("Ton bol est désormais vide et nettoyé!")
 
 class Poelle():
 # Poelle: Représente une poêle avec un contenu (une liste d'objets, par défaut vide).
     def __init__(self, contenu = None):
         self.contenu = [] if contenu is None else contenu
+        pygame.mixer.init()  # Initialize the mixer
+        pygame.mixer.music.load("pan_noise.wav") 
     
     def cuire(self,ingredient):
         time.sleep(1)
         print(f"Cuisson de notre {ingredient.nom} en cours...")
-        time.sleep(3)
+        pygame.mixer.music.play()
+        time.sleep(4)
+        pygame.mixer.music.stop()
         ingredient.etat = "cuit"
         print(f"Notre {ingredient.nom} est cuite")
     
@@ -137,25 +158,29 @@ print(david.lieu)
 def main():
 # La fonction main() appelle ces actions pour simuler le déroulement du scénario.
 # Le résultat final est la création d'une omelette dans la poêle à partir des ingrédients dans le bol.
-    print(f"Ou est David: {david.lieu}")
+    david.localiser()
+    
     david.seDeplacer(maison)
-    print(f"Ou est David: {david.lieu}")
+    
+    david.localiser()
 
     david.seDeplacer(epicerie)
    
-    print(f"panier du shop contient : {panier_1.contenu}")
-    print(f"Les main de Dav : {david.main_gauche}")
+    panier_1.MontrerContenu()
+    
+    david.detenirEnMain()
 
     david.attraper(panier_1)
-    print(f"Les main de Dav : {david.main_gauche}")
 
-    print(f"Avant de passer à la caisse {david.nom} a {david.argent} en poche")
+    david.detenirEnMain()
+
+    david.avoirEnPoche()
 
     for i in david.main_gauche :
         print(i)
         david.payerArticle(i)
 
-    print(f"Après être passer à la caisse {david.nom} a {david.argent} en poche")
+    david.avoirEnPoche()
 
     david.seDeplacer(maison)
 
@@ -166,7 +191,9 @@ def main():
     david.main_gauche = []
     
     print(f"Dans mon bol y a : {mon_bol.contenu}")
-    print(david.main_gauche)
+    
+    david.detenirEnMain()
+
 
     david.seDeplacer(epicerie)
     david.rendrePanier()
@@ -181,8 +208,9 @@ def main():
     print(f"Dans mon bol y a {mon_bol.contenu}")
     #Je passe les ingredients de mon bol a ma poelle...
     ma_poelle.contenu = mon_bol.contenu
-    #je vide mon bol 
-    mon_bol.contenu = []
+     
+    mon_bol.nettoyer()
+
     print(f"Dans ma poelle now j'ai : {ma_poelle.contenu}")
     
     print(omelette.etat)
