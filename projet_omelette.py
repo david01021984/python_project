@@ -106,6 +106,9 @@ class Bol():
         self.contenu = []
         time.sleep(2)
         print("Ton bol est désormais vide et nettoyé!")
+    
+    def transvaseDans(self,recipient):
+        recipient.contenu = self.contenu
 
 
 class Poelle():
@@ -125,6 +128,9 @@ class Poelle():
         #pygame.mixer.music.stop()
         ingredient.etat = "cuit"
         print(f"Notre {ingredient.nom} est cuite")
+
+    def contientQuoi(self):
+        print(f"Dans ma poelle now j'ai : {self.contenu}")
     
     
 # instanciation des objects utilisés dans le prog
@@ -150,13 +156,6 @@ poivre = Ingredient("Poivre",1.3)
 panier_1 = Panier(contenu=[oeuf,lait,fromage])
 panier_2 = Panier(contenu=[sel,poivre])
 
-# print de qq valeurs pour voir clair
-'''
-print(mon_bol.contenu)
-print(ma_poelle.contenu)
-print(david.argent)
-print(david.lieu)
-'''
 
 # Ensuite, il simule une série d'actions de David, telles que se déplacer, attraper un panier, 
 # payer des articles, retourner à la maison, couper des ingrédients, battre des ingrédients dans un bol, 
@@ -212,13 +211,14 @@ def main():
             print(i.etat)
 
     omelette = mon_bol.battre("omelette")
+
     print(f"Dans mon bol y a {mon_bol.contenu}")
-    #Je passe les ingredients de mon bol a ma poelle...
-    ma_poelle.contenu = mon_bol.contenu
+
+    mon_bol.transvaseDans(ma_poelle)
      
     mon_bol.nettoyer()
 
-    print(f"Dans ma poelle now j'ai : {ma_poelle.contenu}")
+    ma_poelle.contientQuoi()
     
     ma_poelle.cuire(omelette)
 
