@@ -200,7 +200,7 @@ def main():
         mon_bol.contenu.append(i)
     david.main_gauche = []
     
-    print(f"Dans mon bol y a : {mon_bol.contenu}")
+    mon_bol.contientQuoi()
     
     david.detientQuoiEnMain()
 
