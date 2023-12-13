@@ -1,98 +1,18 @@
-'''
-Projet Omelette
-
-Créez une classe Personnage avec les propriétés et méthodes suivantes :
- - nom (str)
- - lieu (str)
- - argent (float)
- - main_droite (list)
- - main_gauche (list)
- - se_deplacer(lieu) (méthode)
- - payer_article(article) (méthode)
- - couper(ingredient, outil) (méthode)
-
-Créez une classe Lieu "Maison" avec les propriétés :
- - nom: 'maison'
- - personnes (list, tableau des personnes présentes dans la maison)
-
-Créez une classe Outil "Couteau" pour découper les ingrédients achetés avec les propriétés :
- - nom (str)
- - action (str) avec la valeur initiale 'entier'
-
-Créez une classe Ingrédient pour les produits à mettre dans le magasin :
-- nom (str)
-- etats (list de str) avec les valeurs 'entier', 'coupé', 'moulu'
-- prix (float)
-
-Créez une classe Lieu "Epicerie" avec les propriétés :
- - nom (str)
- - personnes (list, tableau des personnes présentes dans l'épicerie)
- - paniers (list d'objets "Panier" avec une propriété "type" égale à "panier" et le contenu du panier, égal à une list vide)
- - Les ingrédients créés précédemment contenus dans une list.
-
-Créez une classe Poele avec une list comme contenu.
-
- Ajoutez une méthode cuire() qui, après 4 secondes, met l'état 'cuit' à self.contenu[0]. 
- Vous pouvez utiliser la fonction time.sleep(4).
-
-Créez une classe Bol avec une list comme contenu.
- Ajoutez une méthode melanger(nom_melange) qui va créer un nouvel objet "new_melange"
- avec comme nom la variable nom_melange passée en paramètre et avec 'pas cuit' en état.
- Cette méthode remplacera self.contenu par [l'objet new_melange].
-
-Début de la préparation de l'omelette :
- Pour indiquer que le personnage est à la maison :
- Utilisez la méthode se_deplacer avec l'objet Maison en paramètre.
- Affichez un message tel que : print(personnage.nom + " est actuellement à la " + personnage.lieu)
-
- Pour aller à l'épicerie acheter les ingrédients pour l'omelette :
- Répétez la première étape en changeant le paramètre de la méthode se_deplacer par l'épicerie.
- Le personnage prend un des paniers dans l'épicerie (récupère le panier dans les objets de l'épicerie et le met dans sa main droite).
- Affichez un message du type : print(f"{personnage.nom} a pris un panier")
-
-Créez une boucle qui prend chaque élément (ingrédient) du contenu de l'épicerie (1 à 1) et en fait une COPIE dans le panier du personnage.
- Affichez un message à chaque ingrédient pris.
- Payez chaque ingrédient récupéré dans le panier avec la fonction payer_article().
- Affichez un message sur l'argent restant sur le personnage.
-
- Retournez à la maison (pour pouvoir cuisiner) :
- Utilisez la méthode se_deplacer avec l'objet Maison en paramètre.
- Affichez un message.
-
- Mettez chaque ingrédient dans le bol (1 à 1 avec une boucle) :
- Vérifiez que les ingrédients ne se trouvent plus dans le panier.
- Affichez un message pour chaque ingrédient mis dans le bol.
-
- Retournez à l'épicerie pour rapporter le panier :
- Utilisez la méthode se_deplacer avec l'objet Épicerie en paramètre.
- Enlevez le panier de la main droite du personnage et remettez-le dans les paniers de l'épicerie.
- Affichez un message.
-
- Retournez à la maison pour continuer l'omelette :
- Utilisez la méthode se_deplacer avec l'objet Maison en paramètre.
- Affichez un message.
- Vérifiez chaque ingrédient dans le bol et le coupez seulement s'il est entier avec la méthode couper de la personne.
-
- Mélangez le contenu du bol avec la méthode melanger. Nommez ce mélange une 'omelette' (à passer en paramètre).
- Affichez un message avec le nouveau mélange.
- Videz le contenu du bol dans la poêle. Il ne doit plus rien avoir dans le bol et il doit y avoir juste l'omelette pas cuite.
-
- Cuisez l'omelette avec la méthode de la poêle.
- Affichez un message final : print("Notre omelette est cuite :)")
- '''
 #import
 import time 
 
+#definition de mes classes 
 
 class Panier():
-    instances = []
-
+# Panier: Représente un panier avec un type (par défaut "Panier") et un contenu (une liste d'objets, par défaut vide)
     def __init__(self,type="Panier",contenu=None):
         self.type = type 
         self.contenu = [] if contenu is None else contenu
-        Panier.instances.append(self)
-
+        
 class Personnage():
+# Personnage: Représente un personnage avec un nom, une quantité d'argent, un lieu actuel, 
+# et des objets dans ses mains droite et gauche
+
     def __init__(self, nom, argent:float, lieu = None, main_droite=None, main_gauche=None):
         self.nom = nom
         self.lieu = lieu
@@ -124,24 +44,24 @@ class Personnage():
 
 
 class Lieu():
+# Lieu: Représente un lieu avec un nom et une liste de personnes présentes
     def __init__(self, nom, personnes = None):
         self.nom = nom
         self.personnes = [] if personnes is None else personnes
 
 
 class Outil():
+# Outil: Représente un outil avec un nom et une action associée
     def __init__(self,nom,action):
         self.nom = nom
         self.action = action
         
 class Ingredient():
-    instances = []
-
+# Ingredient: Représente un ingrédient avec un nom, un prix, un état (par défaut "Entier").
     def __init__(self, nom, prix:float, etat = "Entier"):
         self.nom = nom
         self.prix = prix
         self.etat = etat 
-        Ingredient.instances.append(self)
 
     def __str__(self):
         return self.nom
@@ -150,12 +70,14 @@ class Ingredient():
         return self.nom
 
 class Shop(Lieu):
+# Shop (Magasin): Hérite de la classe Lieu et représente un magasin avec des paniers, des ingrédients, et des personnes.
     def __init__(self,nom, personnes=None, paniers=None,ingredients=None):
         super().__init__(nom,personnes=None)
         self.paniers = [] if paniers is None else paniers
         self.ingredients = [] if ingredients is None else ingredients
 
 class Bol():
+# Bol: Représente un bol avec un contenu (une liste d'objets, par défaut vide).
     def __init__(self,contenu=None):
         self.contenu = [] if contenu is None else contenu
 
@@ -165,18 +87,22 @@ class Bol():
         return new_ingr
 
 class Poelle():
+# Poelle: Représente une poêle avec un contenu (une liste d'objets, par défaut vide).
     def __init__(self, contenu = None):
         self.contenu = [] if contenu is None else contenu
     
     def cuire(self,ingredient):
         time.sleep(1)
-        print("Cuisson en cours...")
+        print(f"Cuisson de notre {ingredient.nom} en cours...")
         time.sleep(3)
         ingredient.etat = "cuit"
         print(f"Notre {ingredient.nom} est cuite")
     
     
-#instanciation des objects utilisés dans le prog
+# instanciation des objects utilisés dans le prog
+# Le code crée des instances de lieux (maison, épicerie), d'outils (couteau), 
+# d'ingrédients (œuf, lait, fromage, sel, poivre), de paniers, de bols, et d'une poêle. 
+
 
 maison = Lieu("Maison")
 epicerie=Shop("Epicerie",["L'épicier"])
@@ -204,7 +130,13 @@ print(david.argent)
 print(david.lieu)
 '''
 
+# Ensuite, il simule une série d'actions de David, telles que se déplacer, attraper un panier, 
+# payer des articles, retourner à la maison, couper des ingrédients, battre des ingrédients dans un bol, 
+# et enfin cuire dans une poêle
+
 def main():
+# La fonction main() appelle ces actions pour simuler le déroulement du scénario.
+# Le résultat final est la création d'une omelette dans la poêle à partir des ingrédients dans le bol.
     print(f"Ou est David: {david.lieu}")
     david.seDeplacer(maison)
     print(f"Ou est David: {david.lieu}")
