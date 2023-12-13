@@ -102,7 +102,7 @@ class Personnage():
     
     def seDeplacer(self, destination):
         self.lieu = destination.nom
-        destination.personnes = self.nom
+        destination.personnes.append(self.nom)
         print(f"{self.nom} est arrivé à {destination.nom}")
     
     def payerArticle(self, article):
@@ -253,7 +253,6 @@ def main():
     print(ma_poelle.contenu)
 
     mon_bol.contenu = []
-    #print(f"dans mon bol y a : {mon_bol.contenu}")
     
     print(omelette.etat)
     ma_poelle.cuire(omelette)
