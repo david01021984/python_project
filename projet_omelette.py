@@ -26,7 +26,8 @@ class Personnage():
     
     def seDeplacer(self, destination):
         self.lieu = destination.nom
-        destination.personnes.append(self.nom)
+        if self.nom not in destination.personnes:
+            destination.personnes.append(self.nom)
         print(f"{self.nom} est arrivé à {destination.nom}")
     
     def payerArticle(self, article):
@@ -102,6 +103,7 @@ class Bol():
         self.contenu = []
         time.sleep(2)
         print("Ton bol est désormais vide et nettoyé!")
+
 
 class Poelle():
 # Poelle: Représente une poêle avec un contenu (une liste d'objets, par défaut vide).
