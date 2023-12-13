@@ -109,6 +109,10 @@ class Bol():
     
     def transvaseDans(self,recipient):
         recipient.contenu = self.contenu
+    
+    def contientQuoi(self):
+        print(f"Dans mon bol j'ai : {self.contenu}")
+    
 
 
 class Poelle():
@@ -190,7 +194,7 @@ def main():
 
     david.seDeplacer(maison)
 
-    print(david.lieu)
+    david.localiser()
 
     for i in david.main_gauche:
         mon_bol.contenu.append(i)
@@ -212,7 +216,7 @@ def main():
 
     omelette = mon_bol.battre("omelette")
 
-    print(f"Dans mon bol y a {mon_bol.contenu}")
+    mon_bol.contientQuoi()
 
     mon_bol.transvaseDans(ma_poelle)
      
