@@ -150,7 +150,7 @@ class Ingredient():
         return self.nom
 
 class Shop(Lieu):
-    def __init__(self,nom,personnes=None,paniers=None,ingredients=None):
+    def __init__(self,nom, personnes=None, paniers=None,ingredients=None):
         super().__init__(nom,personnes=None)
         self.paniers = [] if paniers is None else paniers
         self.ingredients = [] if ingredients is None else ingredients
@@ -233,7 +233,7 @@ def main():
         mon_bol.contenu.append(i)
     david.main_gauche = []
     
-    print(f"dans mon bol y a : {mon_bol.contenu}")
+    print(f"Dans mon bol y a : {mon_bol.contenu}")
     print(david.main_gauche)
 
     david.seDeplacer(epicerie)
@@ -246,16 +246,17 @@ def main():
             print(i.etat)
 
     omelette = mon_bol.battre("omelette")
-    print(mon_bol.contenu[0])
+    print(f"Dans mon bol y a {mon_bol.contenu}")
     #Je passe les ingredients de mon bol a ma poelle...
     ma_poelle.contenu = mon_bol.contenu
-
-    print(ma_poelle.contenu)
-
+    #je vide mon bol 
     mon_bol.contenu = []
+    print(f"Dans ma poelle now j'ai : {ma_poelle.contenu}")
     
     print(omelette.etat)
     ma_poelle.cuire(omelette)
+    #vérif etat 
+    print(omelette.etat)
 
 
 main()
