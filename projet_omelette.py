@@ -1,6 +1,9 @@
 #import libraries nécessaires
+
 import time 
-import pygame   
+#import pygame 
+#  Pour utiliser la librairie pygame et avoir le son il faut l'installer avec la commande suivante :
+#  pip install pygame et le fichier wav doit être dans le meme folder que le fichier code ;-)
 
 #definition de mes classes 
 
@@ -11,7 +14,7 @@ class Panier():
         self.contenu = [] if contenu is None else contenu
     
     def MontrerContenu(self):
-        print(f"Le panier contient : {panier_1.contenu}") 
+        print(f"Le panier contient : {self.contenu}")
         
 class Personnage():
 # Personnage: Représente un personnage avec un nom, une quantité d'argent, un lieu actuel, 
@@ -50,7 +53,7 @@ class Personnage():
     def localiser(self):
         print(f"{self.nom} se trouve à : {self.lieu}")
 
-    def detenirEnMain(self):
+    def detientQuoiEnMain(self):
         print(f"{self.nom} a en main les articles suivants : {self.main_gauche}")
 
     def avoirEnPoche(self):
@@ -109,15 +112,17 @@ class Poelle():
 # Poelle: Représente une poêle avec un contenu (une liste d'objets, par défaut vide).
     def __init__(self, contenu = None):
         self.contenu = [] if contenu is None else contenu
+        '''commandes pour initialiser le mixer de pygame 
         pygame.mixer.init()  # Initialize the mixer
         pygame.mixer.music.load("pan_noise.wav") 
-    
+        '''
+
     def cuire(self,ingredient):
         time.sleep(1)
         print(f"Cuisson de notre {ingredient.nom} en cours...")
-        pygame.mixer.music.play()
+        #pygame.mixer.music.play()
         time.sleep(4)
-        pygame.mixer.music.stop()
+        #pygame.mixer.music.stop()
         ingredient.etat = "cuit"
         print(f"Notre {ingredient.nom} est cuite")
     
@@ -170,11 +175,11 @@ def main():
    
     panier_1.MontrerContenu()
     
-    david.detenirEnMain()
+    david.detientQuoiEnMain()
 
     david.attraper(panier_1)
 
-    david.detenirEnMain()
+    david.detientQuoiEnMain()
 
     david.avoirEnPoche()
 
@@ -194,7 +199,7 @@ def main():
     
     print(f"Dans mon bol y a : {mon_bol.contenu}")
     
-    david.detenirEnMain()
+    david.detientQuoiEnMain()
 
 
     david.seDeplacer(epicerie)
@@ -215,10 +220,7 @@ def main():
 
     print(f"Dans ma poelle now j'ai : {ma_poelle.contenu}")
     
-    print(omelette.etat)
     ma_poelle.cuire(omelette)
-    #vérif etat 
-    print(omelette.etat)
 
 
 main()
