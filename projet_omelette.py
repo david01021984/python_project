@@ -107,7 +107,7 @@ class Bol():
         time.sleep(2)
         print("Ton bol est désormais vide et nettoyé!")
     
-    def transvaseDans(self,recipient):
+    def transvaserDans(self,recipient):
         recipient.contenu = self.contenu
     
     def contientQuoi(self):
@@ -218,7 +218,7 @@ def main():
 
     mon_bol.contientQuoi()
 
-    mon_bol.transvaseDans(ma_poelle)
+    mon_bol.transvaserDans(ma_poelle)
      
     mon_bol.nettoyer()
 
